@@ -1,10 +1,10 @@
 package com.chatting.ver1.controller;
 
+
 import com.chatting.ver1.dto.LoginInfo;
 import com.chatting.ver1.model.ChatMessage;
 import com.chatting.ver1.model.ChatRoom;
 import com.chatting.ver1.repo.ChatMessageRepository;
-import com.chatting.ver1.repo.ChatRoomJpaRepository;
 import com.chatting.ver1.repo.ChatRoomRepository;
 import com.chatting.ver1.service.JwtTokenProvider;
 import lombok.RequiredArgsConstructor;
@@ -25,7 +25,7 @@ public class ChatRoomController {
     private final ChatRoomRepository chatRoomRepository;
     private final JwtTokenProvider jwtTokenProvider;
     private final ChatMessageRepository chatMessageRepository;
-    private final ChatRoomJpaRepository chatRoomJpaRepository;
+    private final RedisController redisController;
 
     @GetMapping("/room")
     public String rooms(Model model) {
@@ -49,6 +49,8 @@ public class ChatRoomController {
         model.addAttribute("roomId", roomId);
         List<ChatMessage> chatMessageList = chatMessageRepository.findAllByRoomId(roomId);
         model.addAttribute("chatList", chatMessageList);
+        redisController.getRedisStringValue(roomId);
+
         return "/chat/roomdetail";
     }
 

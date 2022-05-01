@@ -1,7 +1,10 @@
 package com.chatting.ver1.config;
 
+
+// import 생략...
+
 import com.chatting.ver1.pubsub.RedisSubscriber;
-import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
@@ -12,11 +15,10 @@ import org.springframework.data.redis.listener.adapter.MessageListenerAdapter;
 import org.springframework.data.redis.serializer.Jackson2JsonRedisSerializer;
 import org.springframework.data.redis.serializer.StringRedisSerializer;
 
-// import 생략...
-
 @Configuration
 public class RedisConfig {
-
+    private @Value("${spring.redis.host}") String redisHost;
+    private @Value("${spring.redis.port}") int redisPort;
     /**
      * 단일 Topic 사용을 위한 Bean 설정
      */

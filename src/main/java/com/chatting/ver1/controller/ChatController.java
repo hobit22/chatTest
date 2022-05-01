@@ -1,8 +1,6 @@
 package com.chatting.ver1.controller;
 
-import com.chatting.ver1.config.RedisConfig;
 import com.chatting.ver1.model.ChatMessage;
-import com.chatting.ver1.model.ChatRoom;
 import com.chatting.ver1.repo.ChatMessageRepository;
 import com.chatting.ver1.repo.ChatRoomRepository;
 import com.chatting.ver1.service.JwtTokenProvider;
@@ -12,8 +10,6 @@ import org.springframework.data.redis.listener.ChannelTopic;
 import org.springframework.messaging.handler.annotation.Header;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.stereotype.Controller;
-
-// import 생략...
 
 @RequiredArgsConstructor
 @Controller
@@ -49,6 +45,5 @@ public class ChatController {
         }
         // Websocket에 발행된 메시지를 redis로 발행(publish)
         redisTemplate.convertAndSend(channelTopic.getTopic(), message);
-        chatMessageRepository.save(message);
     }
 }

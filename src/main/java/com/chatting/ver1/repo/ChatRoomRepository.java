@@ -38,6 +38,8 @@ public class ChatRoomRepository {
         ChatRoom chatRoom = ChatRoom.create(name);
         chatRoomJpaRepository.save(chatRoom);
         opsHashChatRoom.put(CHAT_ROOMS, chatRoom.getRoomId(), chatRoom);
+        System.out.println("chatRoom = " + chatRoom);
+        System.out.println("chatRoom.getRoomId() = " + chatRoom.getRoomId());
         return chatRoom;
     }
 }
