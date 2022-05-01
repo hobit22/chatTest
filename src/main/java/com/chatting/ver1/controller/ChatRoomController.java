@@ -66,5 +66,6 @@ public class ChatRoomController {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         String name = auth.getName();
         return LoginInfo.builder().name(name).token(jwtTokenProvider.generateToken(name)).build();
+
     }
 }
